@@ -25,13 +25,13 @@ Clone the Git-Project, e.g.:
 
 ```bash
 cd ~
-git clone https://github.com/sassoftware/getwarehouse.git
+git clone https://github.com/sassoftware/viya4-warehouse.git
 ```
 
 Change the directory and make sure that the getWarehouse.sh script has execute rights:
 
 ```bash
-cd ~/getWarehouse
+cd ~/viya4-warehouse
 chmod +x getWarehouse.sh
 ```
 

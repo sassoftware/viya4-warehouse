@@ -1,58 +1,64 @@
-# SAS Viya Warehouse
+# SAS&reg; Viya Warehouse
 
 ## Overview
 
-The aim of this project is to provide an alternative way to download the SAS Viya Warehouse without having to use the SAS MirrorMgr. The SAS Warehouse contains all the information that the SAS Deployment Operator needs during the deployment. A list of container images and permissions is also extracted. With this information, a third-party tool can be used to provide the container images to an internal registry.
+This project provides an alternate way to download the entitled contents of the SAS Viya Warehouse without using SAS Mirror Manager. The tools in this project create a SAS Viya Warehouse, which contains all the information that the SAS Deployment Operator requires during the SAS&reg; Viya&reg; deployment process. 
 
-**Attention:** Please note to use the same files for the download of the Warehouse and the SAS deployment. 
+A list of container images and permissions is also extracted, based on the contents of a SAS Viya software order. With this information, a third-party tool can be used to provide the container images to an internal registry.
 
-### Prerequisites
+**IMPORTANT:** You must use the same files for the download of the SAS Viya Warehouse contents to perform the SAS Viya deployment. 
 
-The getWarehouse script needs two input files which can be downloaded from the **my.sas.com** portal. To access the files you need a valid SAS license, a registration on my.sas.com and the permissions to download your orders. 
+### Requirements
 
-![mysascom_head](./images/mysascom_head.png)
+The getWarehouse script that is provided in this project requires two input files, which can be downloaded from the `my.sas.com` portal. To access the files, you need a valid SAS license, a registration on [my.sas.com](https://my.sas.com/), and the required permissions to download your software orders. 
 
-After you select "My Orders" your orders will shown in the list  below. Here you can download the needed files. 
-
-1. The SAS Deployment Assets 
-2. The SAS Certificates
-
-![mysascom](./images/mysascom.png)
-
-### Installation
-
-Clone the Git-Project, e.g.: 
-
-```bash
-cd ~
-git clone https://github.com/sassoftware/viya4-warehouse.git
-```
-
-Change the directory and make sure that the getWarehouse.sh script has execute rights:
-
-```bash
-cd ~/viya4-warehouse
-chmod +x getWarehouse.sh
-```
+When you order SAS software, SAS sends a Software Order Email (SOE) to your business or organization. Your SOE includes information about the software order, including a link to `my.sas.com`.
 
 
 ## Getting Started
 
-To start copy your SAS Deployment Assets and the SAS Certificates into the same directory of the getWarehouse.sh script. 
+1. Log in to `my.sas.com`. Click the **My Orders** tab.
 
-![getWarehouse_init](./images/getWarehouse_init.png)
+   ![mysascom_head](./images/mysascom_head.png)
+
+   Your orders are displayed in a list that resembles the one shown below. 
+   
+1. From the list of orders, download the following required files: 
+
+      - The SAS Deployment Assets 
+      - The SAS Certificates
+
+      ![mysascom](./images/mysascom.png)
+
+1. Clone the Git project. Run the following command: 
+
+   ```bash
+   cd ~
+   git clone https://github.com/sassoftware/viya4-warehouse.git
+   ```
+
+1. Change directories and make sure that the getWarehouse.sh script has execute rights:
+
+   ```bash
+   cd ~/viya4-warehouse
+   chmod +x getWarehouse.sh
+   ```
+
+1. Copy your SAS Deployment Assets ZIP file and the SAS certificates ZIP file into the same directory as the getWarehouse.sh script. 
+
+   ![getWarehouse_init](./images/getWarehouse_init.png)
 
 ### Running
 
-For downloading the SAS warehouse data, execute the getWarehouse.sh script with these three parameters in the exact order:
+In order to download the SAS Warehouse data, execute the getWarehouse.sh script with these three parameters in this exact order:
 
-1. the SAS Deployment Assets file
-2. the SAS Certificates file
-3. the output destination (directory)
+1. the filename of the SAS Deployment Assets ZIP file
+2. the filename of the SAS Certificates ZIP file
+3. the output destination (a directory path)
 
 ### Examples
 
-Below is an example call. Please note the three parameters behind the getWarehouse.sh script.
+Below is an example API call that shows the three parameters that the getWarehouse.sh script requires.
 
 ```bash
 # Copy SAS Deployments Assets & Certificates into the current dir
@@ -62,21 +68,21 @@ Below is an example call. Please note the three parameters behind the getWarehou
   ./
 ```
 
-If the script ends successfully the output should look like this. 
+If the script ends successfully, the output should resemble the following: 
 
 ![getWarehouse_call](./images/getWarehouse_call.png)
 
-Now you will find a new directory which container the SAS warehouse data.
+A new directory that contains the SAS Warehouse data has been created:
 
 ![getWarehouse_result](./images/getWarehouse_result.png)
 
-As an addition to the SAS warehouse data the result directory contains a list of the SAS container images and the entitlement information to download them.
+As an addition to the SAS Warehouse data, a `result` directory contains a list of the SAS container images and the entitlement information that is required in order to download these images.
 
 ![getWarehouse_images](./images/getWarehouse_images.png)
 
 ### Troubleshooting
 
-If the download doesn't work please be sure the the client certificate isn't removed by any web washer.
+If the download does not succeed, verify that the client certificate has not been removed by a web washer.
 
 ## Contributing
 

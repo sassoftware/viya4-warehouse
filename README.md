@@ -2,11 +2,11 @@
 
 ## Overview
 
-This project provides an alternate way to download the entitled contents of the SAS Viya Warehouse without using SAS Mirror Manager. The tools in this project create a SAS Viya Warehouse, which contains all the information that the SAS Deployment Operator requires during the SAS&reg; Viya&reg; deployment process. 
+This project provides an alternate way to download the contents of a SAS&reg; Viya&reg; software order without using SAS Mirror Manager. The tools in this project create a software repository warehouse, which contains all the information that the SAS Viya Deployment Operator requires during the SAS Viya deployment process. 
 
 A list of container images and permissions is also extracted, based on the contents of a SAS Viya software order. With this information, a third-party tool can be used to provide the container images to an internal registry.
 
-**IMPORTANT:** You must use the same files for the download of the SAS Viya Warehouse contents to perform the SAS Viya deployment. 
+**IMPORTANT:** You must use the same files for the download of the repository warehouse contents to perform the SAS Viya deployment. 
 
 ### Requirements
 
@@ -50,7 +50,7 @@ When you order SAS software, SAS sends a Software Order Email (SOE) to your busi
 
 ### Running
 
-In order to download the SAS Warehouse data, execute the getWarehouse.sh script with these three parameters in this exact order:
+In order to download the repository warehouse data, execute the getWarehouse.sh script with these three parameters in this exact order:
 
 1. the filename of the SAS Deployment Assets ZIP file
 2. the filename of the SAS Certificates ZIP file
@@ -72,11 +72,11 @@ If the script ends successfully, the output should resemble the following:
 
 ![getWarehouse_call](./images/getWarehouse_call.png)
 
-A new directory that contains the SAS Warehouse data has been created:
+A new directory that contains the SAS Viya repository warehouse data has been created:
 
 ![getWarehouse_result](./images/getWarehouse_result.png)
 
-As an addition to the SAS Warehouse data, a `result` directory contains a list of the SAS container images and the entitlement information that is required in order to download these images.
+As an addition to the SAS repository warehouse data, a `result` directory contains a list of the SAS container images and the entitlement information that is required in order to download these images.
 
 ![getWarehouse_images](./images/getWarehouse_images.png)
 

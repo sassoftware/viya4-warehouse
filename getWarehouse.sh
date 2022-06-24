@@ -7,7 +7,8 @@
 # - Extract the list of images from the SAS Deployment Assets
 #
 # Historie:
-#   v1.0   12 Jan. 2022 - M. Heidemann - SAS Institute GmbH
+#   v1.0   12 Jan. 2022 - M. Heidemann - SAS Institute GmbH - Init
+#   v1.1   24 June 2022 - M. Heidemann - SAS Institute GmbH - Add curlOpts, remove --insecure
 #
 
 # $1 - DeploymentData
@@ -42,6 +43,7 @@ lodPath="${warehousePath}/lod/${cadence_name}/${cadence_version}"
 
 curlCertString="--cert ${certPath}/entitlement-certificates/entitlement_certificate.pem --cacert ${certPath}/ca-certificates/SAS_CA_Certificate.pem"
 curlUrl=https://ses.sas.com/ses
+curlOpts="-v"
 
 function gwPrint () {
   printf "$1 \n"
@@ -63,13 +65,13 @@ gwPrint "Extract certificates"
 ${unzipCmd} -q "${SASCertificate}" -d "${certPath}"
 
 gwPrint "Get entitlements"
-curl -vk ${curlUrl}/entitlements.json ${curlCertString} -o ${warehousePath}/entitlements.json >/dev/null 2>&1
+curl ${curlOpts} ${curlUrl}/entitlements.json ${curlCertString} -o ${warehousePath}/entitlements.json >/dev/null 2>&1
 gwPrint "Get shipped.mc"
-curl -vk ${curlUrl}/cadences/shipped.mc ${curlCertString} -o ${cadencesPath}/shipped.mc >/dev/null 2>&1
+curl ${curlOpts} ${curlUrl}/cadences/shipped.mc ${curlCertString} -o ${cadencesPath}/shipped.mc >/dev/null 2>&1
 gwPrint "Get rel"
-curl -vk ${curlUrl}/rel/${cadence_name}/${cadence_version} ${curlCertString} -o ${relPath}/${cadence_version} >/dev/null 2>&1
+curl ${curlOpts} ${curlUrl}/rel/${cadence_name}/${cadence_version} ${curlCertString} -o ${relPath}/${cadence_version} >/dev/null 2>&1
 gwPrint "Get lod"
-curl -vk ${curlUrl}/lod/${cadence_name}/${cadence_version}/${cadence_release} ${curlCertString} -o ${lodPath}/${cadence_release} >/dev/null 2>&1
+curl ${curlOpts} ${curlUrl}/lod/${cadence_name}/${cadence_version}/${cadence_release} ${curlCertString} -o ${lodPath}/${cadence_release} >/dev/null 2>&1
 
 gwPrint "Get cadence and list of images"
 tar --wildcards -C ${warehousePath} -xzf "${SASDeploymentAssetFile}" 'sas-bases/.orchestration/images.yaml' 'sas-bases/.orchestration/cadence.yaml'
